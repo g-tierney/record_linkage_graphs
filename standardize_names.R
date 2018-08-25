@@ -14,8 +14,6 @@ combine_ids <- function(...){
 name_matches <- name_matches %>% rowwise() %>% mutate(name_key = combine_ids(name_key,gender,weapon,bthyear),
                                                       name_key2 = combine_ids(name_key2,gender,weapon,bthyear)) 
 
-library(igraph)
-
 #turn data into a graph
 graph <- graph.data.frame(name_matches %>% filter(match == 1) %>% select(name_key,name_key2),directed = F)
 dg <- decompose.graph(graph)
@@ -36,11 +34,13 @@ name_standardizations <- name_standardizations %>% separate(name_key_combined,in
 head(name_standardizations)
 
 #output
-#write_csv(name_standardizations,path = str_c(repository,"/data/fencing_data/name_standardizations.csv"))
+write_csv(name_standardizations,path = "name_standardizations.csv")
 
 graph_plot <- graph.data.frame(name_matches[1:1000] %>% filter(match == 1) %>% select(name_key,name_key2),directed = F)
 ggnet2(graph_plot,label = F,layout.exp=0,color = "lightskyblue2")
 
+#make header image
+set.seed(0515)
 png(width = 1280,height = 400,filename = "sample_graph.png")
 ggnet2(graph_plot,label = F,layout.exp=0,color = "lightskyblue2")
 dev.off()
