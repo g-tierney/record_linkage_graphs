@@ -1,10 +1,16 @@
 ---
 title: "Record linkage: An Adventure in Graph Theory"
 author: "Graham Tierney"
+date: 2018-08-25
+categories: ["Data Science","Methods"]
+tags: ["Record Linkage","Fencing","Graphs","Networks"]
+summary: "How to efficiently standardize names and link observations from different sources using graphs." 
 output: html_document
-date: 2018-08-24
-image_preview: "sample_graph.jpeg"
+header:
+  image: "sample_graph.png"
 ---
+
+![](sample_graph.png)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -54,7 +60,7 @@ ggnet2(graph_plot,label = T,layout.exp=2,color = "lightskyblue2") +
   ggtitle("Sample Name Network") + theme(plot.title = element_text(hjust = .5,face = "bold",size = 15))
 ```
 
-Now here is the code itself:
+Now here is the code itself. The full script and example data are available at [this Github repository](https://github.com/g-tierney/record_linkage_graphs).  
 
 ```{r}
 library(igraph)
@@ -90,4 +96,5 @@ name_standardizations[1:7,] %>% kableExtra::kable(format = "html") %>%
 ```
 
 The lesson I learned from this experience was the importance of taking a step back from a difficult problem and approaching it from a different angle. Not thinking of data as a matrix of numbers was instrumental to solving this particular problem and is likely key to solving many others. 
+
 
